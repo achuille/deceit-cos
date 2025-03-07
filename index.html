@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deceit 1 Cosmetics</title>
+    <style>
+        /* === CSS === */
+        /* Police Open Sans */
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            background-color: #121212;
+            color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: url('images/bg.jpeg');
+            background-size: auto;
+            background-position: center;
+            position: relative;
+            margin-top: 30px;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAWElEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=');
+            opacity: 0.5;
+            z-index: -1;
+            pointer-events: none;
+            animation: subtleParticles 20s linear infinite;
+            background-repeat: repeat;
+            background-size: 10px 10px;
+        }
+
+        @keyframes subtleParticles {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
+        header {
+            background-image: url('https://clan.fastly.steamstatic.com/images/26303899/91ca6440f6094005516c5bb79bb706195e1f8dcf.png');
+            background-size: cover;
+            background-position: center;
+            height: 180px;
+            width: 95%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1;
+            border-radius: 15px;
+        }
+
+        h1 {
+            color: #f0f0f0;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9);
+            font-size: 3em;
+            margin: 0;
+            z-index: 2;
+            animation: pulseTitle 5s ease-in-out infinite alternate;
+            margin-bottom: 10px;
+        }
+
+        #header-subtitle {
+            color: #ddd;
+            font-size: 0.9em;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        @keyframes pulseTitle {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+
+        /* Style pour le conteneur de la barre de recherche (glassmorphism) */
+        #search-bar-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+            width: 90%;
+            max-width: 900px;
+            position: relative;
+            z-index: 100;
+            padding: 20px; /* Ajout de padding pour l'effet glassmorphism */
+            background: rgba(255, 255, 255, 0.08); /* Background semi-transparent blanc */
+            border-radius: 15px; /* Bords arrondis */
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.3), 0 8px 15px rgba(0, 0, 0, 0.6); /* Ombres pour la profondeur */
+            backdrop-filter: blur(15px); /* Effet de flou glassmorphism */
+            border: 1px solid rgba(255, 255, 255, 0.15); /* Bordure fine blanche */
+        }
+
+        input[type="text"] {
+            padding: 12px 15px;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #f0f0f0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            flex: 1;
+            min-width: 0;
+            transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+            margin-bottom: 0;
+            background: transparent; /* Fond transparent pour input dans glassmorphism */
+            border: none; /* Supprime la bordure de l'input, géré par le container */
+            box-shadow: none; /* Supprime l'ombre de l'input, géré par le container */
+            backdrop-filter: blur(5px); /* Léger blur pour l'input */
+        }
+
+        input[type="text"]:focus {
+            border-color: rgba(255, 255, 255, 0.7);
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.15);
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.3), 0 4px 8px rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.08); /* Background semi-transparent focus */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Bordure focus */
+            backdrop-filter: blur(10px); /* Blur un peu plus fort au focus */
+        }
+
+
+        #search-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            width: 90%;
+            max-width: 900px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.3), 0 8px 15px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            flex-direction: column;
+            position: relative;
+        }
+
+        #search-container > div {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+
+        select, #reset-filters-button {
+            padding: 12px 15px;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #f0f0f0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            flex: 1;
+            min-width: 0;
+            transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+             margin-bottom: 10px;
+        }
+
+        select:focus, #reset-filters-button:focus {
+            border-color: rgba(255, 255, 255, 0.7);
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.15);
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.3), 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        select {
+            flex: 1;
+            width: auto;
+            padding: 12px 15px;
+            margin-right: 0;
+            min-width: 150px;
+        }
+
+
+        #cosmetics-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            width: 95%;
+            max-width: 1200px;
+            justify-content: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .cosmetic-item {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease, border-color 0.3s ease; /* Transition améliorée */
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* NOUVEAU STYLE DE HOVER */
+        .cosmetic-item:hover {
+            transform: scale(1.05); /* Léger zoom */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8); /* Ombre plus prononcée */
+            background-color: rgba(0, 0, 0, 0.35); /* Fond légèrement plus clair */
+            border-color: rgba(255, 255, 255, 0.3); /* Bordure plus claire */
+        }
+
+
+        .cosmetic-name {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            color: #eee;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cosmetic-details {
+            font-size: 1em;
+            color: #ddd;
+            line-height: 1.6;
+            padding-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .rarity-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        .rarity-legendary { background-color: #ffc107; }
+        .rarity-rare { background-color: #9c27b0; }
+        .rarity-uncommon { background-color: #2196f3; }
+        .rarity-common { background-color: #eee; }
+
+        .vault-status {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .vault-true {
+            color: #ffb74d;
+            font-weight: bold;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+        }
+
+        .vault-false {
+            color: #aed581;
+            font-weight: bold;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .cosmetic-item {
+            animation: fadeIn 0.7s ease-out forwards;
+            opacity: 0;
+        }
+
+        footer {
+            width: 95%;
+            max-width: 1200px;
+            padding: 20px;
+            text-align: center; /* S'assure que le texte est centré */
+            color: #aaa;
+            font-size: 0.9em;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center; /* Centre horizontalement le contenu flex */
+            align-items: flex-start;
+            flex-direction: column;
+             background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 40px;
+            margin-bottom: 60px; /* MARGE AJOUTÉE APRÈS LE FOOTER */
+        }
+
+        .creator-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            justify-content: center; /* Centre horizontalement le contenu creator-info */
+        }
+
+        .creator-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left; /* Réaligne le texte du créateur à gauche */
+        }
+
+        #pagination-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .pagination-button {
+            padding: 8px 12px;
+            font-size: 0.9em;
+            background-color: rgba(255, 255, 255, 0.08);
+            color: #f0f0f0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin: 2px;
+            backdrop-filter: blur(10px);
+        }
+
+        .pagination-button:hover, .pagination-button.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .pagination-button:disabled {
+            opacity: 0.5;
+            cursor: default;
+        }
+
+        #results-count {
+            color: #ddd;
+            font-size: 0.95em;
+            margin-bottom: 10px;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+
+        #reset-filters-button {
+            padding: 12px 15px;
+            font-size: 0.9em;
+            background-color: rgba(255, 255, 255, 0.08);
+            color: #f0f0f0;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin-left: 10px;
+            backdrop-filter: blur(10px);
+            background-color: rgba(220, 53, 69, 0.1);
+            color: #f8d7da;
+            border: 1px solid rgba(220, 53, 69, 0.2);
+        }
+
+        #reset-filters-button:hover {
+            background-color: rgba(220, 53, 69, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                height: 150px;
+                border-radius: 10px;
+                margin-bottom: 20px;
+            }
+            header::before {
+                border-radius: 10px;
+            }
+            h1 {
+                font-size: 2.2em;
+                margin-bottom: 8px;
+            }
+            #header-subtitle {
+                font-size: 0.85em;
+                margin-bottom: 12px;
+            }
+            #search-bar-container { /* Container barre de recherche mobile */
+                margin-bottom: 10px; /* Marge réduite sur mobile */
+                padding: 15px; /* Padding réduit sur mobile */
+                border-radius: 10px; /* Bords arrondis mobile */
+            }
+             #search-bar-container,  #search-container { /* Glassmorphism mobile (autocomplétion retirée) */
+                background: rgba(255, 255, 255, 0.08);
+                backdrop-filter: blur(10px);
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+                border: 1px solid rgba(255, 255, 255, 0.15);
+            }
+
+            input[type="text"] {
+                border-radius: 8px; /* Input arrondi mobile */
+                padding: 10px; /* Padding input mobile */
+                background: transparent; /* Fond transparent input mobile */
+                border: none; /* Pas de bordure input mobile */
+                box-shadow: none; /* Pas d'ombre input mobile */
+                backdrop-filter: blur(5px); /* Léger blur input mobile */
+            }
+            input[type="text"]:focus {
+                 background: rgba(255, 255, 255, 0.08); /* Fond transparent input mobile focus */
+                border: 1px solid rgba(255, 255, 255, 0.2); /* Bordure input mobile focus */
+                backdrop-filter: blur(8px); /* Blur un peu plus fort au focus mobile */
+            }
+            #search-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 20px;
+                padding: 15px;
+            }
+            #search-container > div {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+                margin-top: 10px;
+            }
+            select, input[type="text"], #reset-filters-button {
+                width: 90%;
+                margin-bottom: 0;
+                margin-right: 0;
+                padding: 10px;
+                border-radius: 8px;
+            }
+            #cosmetics-container {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 20px;
+            }
+            .cosmetic-item {
+                padding: 20px;
+                border-radius: 10px;
+            }
+            .cosmetic-item:hover {
+                filter: blur(0px);
+            }
+            .cosmetic-name {
+                font-size: 1.3em;
+            }
+            .cosmetic-details {
+                font-size: 1em;
+                line-height: 1.5;
+            }
+            footer {
+                margin-top: 20px;
+                padding: 15px;
+                margin-top: 30px;
+                margin-bottom: 50px; /* MARGE AJOUTÉE APRÈS LE FOOTER MOBILE */
+            }
+            #pagination-container {
+                gap: 5px;
+            }
+            .pagination-button {
+                padding: 6px 10px;
+                font-size: 0.85em;
+            }
+            #reset-filters-button {
+                margin-left: 0;
+                margin-top: 10px;
+                width: 90%;
+            }
+            #results-count {
+                margin-bottom: 8px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Deceit 1 Cosmetics</h1>
+    </header>
+
+    <div id="search-bar-container">
+        <input type="text" id="search-name" placeholder="Rechercher par nom de cosmétique..." autocomplete="off">
+    </div>
+
+    <div id="search-container">
+        <div>
+            <select id="filter-rarity">
+                <option value="">Filtrer par Rareté</option>
+                <option value="legendary">Légendaire</option>
+                <option value="rare">Rare</option>
+                <option value="uncommon">Peu commun</option>
+                <option value="common">Commun</option>
+            </select>
+            <select id="filter-date">
+                <option value="">Filtrer par Date</option>
+            </select>
+            <select id="filter-event">
+                <option value="">Filtrer par Événement</option>
+            </select>
+            <button id="reset-filters-button">Réinitialiser les filtres</button>
+        </div>
+        <div id="results-count"></div>
+    </div>
+
+    <div id="cosmetics-container">
+        </div>
+
+    <div id="pagination-container"> </div>
+
+    <footer>
+        <p id="header-subtitle" style="margin-bottom: 10px;">Catalogue des cosmétiques de Deceit 1 <br> <span style="font-size:0.8em;">(dernière mise à jour le 5 mars 2025)</span></p>
+        <p style="margin-bottom: 15px;">Site officiel de Deceit : <a href="https://deceit.gg/" target="_blank">deceit.gg</a></p>
+        Données fournies par <a href="https://github.com/BaselineGG/DeceitAPI" target="_blank">DeceitAPI</a>.
+        <div class="creator-info">
+            <img class="creator-profile-image" src="images/pp.png" alt="Profil de achhille">
+            <div class="creator-text">
+                Créé par achhille (et un peu Gemini aussi)<br>
+                <a href="https://discord.com/servers/deceit-fr-794586857421799474" target="_blank">Discord Deceit FR</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* === JavaScript === */
+        document.addEventListener('DOMContentLoaded', async () => {
+            const cosmeticsDataUrl = 'https://raw.githubusercontent.com/BaselineGG/DeceitAPI/refs/heads/master/resources/unlocks.csv';
+            const cosmeticsContainer = document.getElementById('cosmetics-container');
+            const searchNameInput = document.getElementById('search-name');
+            const filterRaritySelect = document.getElementById('filter-rarity');
+            const filterDateSelect = document.getElementById('filter-date');
+            const filterEventSelect = document.getElementById('filter-event');
+            const paginationContainer = document.getElementById('pagination-container');
+            const resultsCountElement = document.getElementById('results-count');
+            const resetFiltersButton = document.getElementById('reset-filters-button');
+
+            let cosmetics = [];
+            let currentFilteredCosmetics = [];
+            const cosmeticsPerPage = 24;
+            let currentPage = 1;
+            const paginationPageRange = 3;
+
+            // Dictionnaire des alias de cosmétiques (Nom CSV -> [alias1, alias2, ...])
+            const cosmeticAliases = {
+                "Black_Beanie": ["bonnet noir", "black bonnet"],
+                "Blue_Beanie": ["bonnet bleu", "blue bonnet"],
+                "Blue_Partyhat": ["chapeau de fête bleu", "blue party hat"],
+                "Boater": ["canotier"],
+                "Black_Cat_Ears": ["oreilles de chat noir", "black cat ears"],
+                "Afro": ["afro hair", "cheveux afro"]
+                // Ajoutez ici les alias pour les autres cosmétiques si nécessaire
+            };
+
+
+            async function loadCosmetics() {
+                try {
+                    const response = await fetch(cosmeticsDataUrl);
+                    const csvData = await response.text();
+                    cosmetics = parseCSV(csvData);
+
+                    // Traduction des noms d'événements et récupération des dates/événements uniques
+                    const uniqueDatesSet = new Set();
+                    const uniqueEventsSet = new Set();
+
+                    cosmetics.forEach(cosmetic => {
+                        if (cosmetic.date && cosmetic.date !== 'N/A' && cosmetic.date !== '') {
+                            uniqueDatesSet.add(cosmetic.date);
+                        }
+                        if (cosmetic.event && cosmetic.event !== 'N/A' && cosmetic.event !== '') {
+                            let translatedEvent = cosmetic.event;
+                            if (translatedEvent.toLowerCase() === 'christmas') {
+                                translatedEvent = 'Noël';
+                            } else if (translatedEvent.toLowerCase() === 'easter') {
+                                translatedEvent = 'Pâques';
+                            } else if (translatedEvent.toLowerCase() === 'summer') {
+                                translatedEvent = 'Été';
+                            }
+                            cosmetic.event = translatedEvent;
+                            uniqueEventsSet.add(translatedEvent);
+                        }
+                    });
+
+                    const uniqueDatesArray = Array.from(uniqueDatesSet).sort();
+                    const uniqueEventsArray = Array.from(uniqueEventsSet).sort();
+
+                    populateDropdown(filterDateSelect, uniqueDatesArray, 'Filtrer par Date');
+                    populateDropdown(filterEventSelect, uniqueEventsArray, 'Filtrer par Événement');
+
+                    currentFilteredCosmetics = [...cosmetics];
+                    displayCosmetics(currentFilteredCosmetics, currentPage);
+                    generatePaginationButtons(currentFilteredCosmetics, currentPage);
+                    updateResultsCount(currentFilteredCosmetics.length);
+
+
+                    searchNameInput.addEventListener('input', filterCosmetics); // Écouteur sur l'input de recherche - MAINTENANT ICI
+                    filterRaritySelect.addEventListener('change', filterCosmetics);
+                    filterDateSelect.addEventListener('change', filterCosmetics);
+                    filterEventSelect.addEventListener('change', filterCosmetics);
+                    resetFiltersButton.addEventListener('click', resetFilters);
+
+
+                } catch (error) {
+                    console.error('Error fetching or parsing CSV data:', error);
+                    cosmeticsContainer.innerHTML = '<p>Erreur lors du chargement des cosmétiques.</p>';
+                }
+            }
+
+            function populateDropdown(selectElement, optionsArray, defaultOptionText) {
+                const defaultOption = document.createElement('option');
+                defaultOption.value = '';
+                defaultOption.textContent = defaultOptionText;
+                selectElement.appendChild(defaultOption);
+
+                optionsArray.forEach(optionText => {
+                    const optionElement = document.createElement('option');
+                    optionElement.value = optionText;
+                    optionElement.textContent = optionText;
+                    selectElement.appendChild(optionElement);
+                });
+            }
+
+            function parseCSV(csvText) {
+                const lines = csvText.split('\n').slice(1);
+                return lines.map(line => {
+                    const columns = line.split(',');
+                    const cosmetic = {
+                        itemId: columns[0],
+                        name: columns[1],
+                        type: columns[2],
+                        rarity: columns[3],
+                        vault: columns[4],
+                        supply: columns[5],
+                        event: columns[6],
+                        date: columns[7],
+                        image: columns[8]
+                    };
+                    cosmetic.aliases = cosmeticAliases[cosmetic.name] || []; // Ajout des alias
+                    return cosmetic;
+                }).filter(cosmetic => cosmetic.itemId);
+            }
+
+            function displayCosmetics(cosmeticsToDisplay, page) {
+                cosmeticsContainer.innerHTML = '';
+                if (cosmeticsToDisplay.length === 0) {
+                    cosmeticsContainer.innerHTML = '<p>Aucun cosmétique trouvé pour cette recherche.</p>';
+                    paginationContainer.innerHTML = '';
+                    updateResultsCount(0);
+                    return;
+                }
+
+                const startIndex = (page - 1) * cosmeticsPerPage;
+                const endIndex = startIndex + cosmeticsPerPage;
+                const pagedCosmetics = cosmeticsToDisplay.slice(startIndex, endIndex);
+
+                pagedCosmetics.forEach(cosmetic => {
+                    const cosmeticDiv = document.createElement('div');
+                    cosmeticDiv.className = 'cosmetic-item';
+
+                    const namePara = document.createElement('p');
+                    namePara.className = 'cosmetic-name';
+                    namePara.textContent = cosmetic.name.replace(/_/g, ' ');
+                    cosmeticDiv.appendChild(namePara);
+
+                    const detailsDiv = document.createElement('div');
+                    detailsDiv.className = 'cosmetic-details';
+
+                    let rarityDot = '';
+                    let rarityClass = '';
+                    let rarityText = cosmetic.type;
+                    let rarityTextFr = '';
+
+                    switch (cosmetic.type ? cosmetic.type.toLowerCase() : '') {
+                        case 'legendary': rarityClass = 'rarity-legendary'; rarityDot = `<span class="rarity-dot rarity-legendary"></span>`; rarityTextFr = 'Légendaire'; break;
+                        case 'rare': rarityClass = 'rarity-rare'; rarityDot = `<span class="rarity-dot rarity-rare"></span>`; rarityTextFr = 'Rare'; break;
+                        case 'uncommon': rarityClass = 'rarity-uncommon'; rarityDot = `<span class="rarity-dot rarity-uncommon"></span>`; rarityTextFr = 'Peu commun'; break;
+                        case 'common': rarityClass = 'rarity-common'; rarityDot = `<span class="rarity-dot rarity-common"></span>`; rarityTextFr = 'Commun'; break;
+                        default: rarityDot = ''; rarityTextFr = 'Inconnue';
+                    }
+
+                    let vaultTextFr = '';
+                    if (cosmetic.vault.toLowerCase() === 'true') {
+                        vaultTextFr = 'Non Obtensible';
+                    } else if (cosmetic.vault.toLowerCase() === 'false') {
+                        vaultTextFr = 'Obtensible';
+                    } else {
+                        vaultTextFr = 'Information non disponible';
+                    }
+
+                    let detailsHTML = `
+                        Rareté: ${rarityDot} ${rarityTextFr}<br>  <div class="vault-status">Vault: <span class="vault-${cosmetic.vault.toLowerCase()}">${vaultTextFr}</span></div>
+                    `;
+                     if (cosmetic.event && cosmetic.event !== 'N/A' && cosmetic.event !== '') {
+                        detailsHTML += `Événement: ${cosmetic.event}<br>`;
+                    }
+                    if (cosmetic.date && cosmetic.date !== 'N/A' && cosmetic.date !== '') {
+                        detailsHTML += `Date de sortie: ${cosmetic.date}`;
+                    }
+
+                    detailsDiv.innerHTML = detailsHTML;
+                    cosmeticDiv.appendChild(detailsDiv);
+                    cosmeticsContainer.appendChild(cosmeticDiv);
+                });
+
+                generatePaginationButtons(cosmeticsToDisplay, page);
+            }
+
+            function filterCosmetics() {
+                const searchTerm = searchNameInput.value.toLowerCase();
+                const filterRarity = filterRaritySelect.value;
+                const filterDate = filterDateSelect.value.toLowerCase();
+                const filterEvent = filterEventSelect.value.toLowerCase();
+
+                currentFilteredCosmetics = cosmetics.filter(cosmetic => {
+                    const nameMatch = cosmetic.name.toLowerCase().includes(searchTerm) || cosmetic.aliases.some(alias => alias.toLowerCase().includes(searchTerm)); // Recherche par alias
+                    const rarityMatch = filterRarity ? cosmetic.type.toLowerCase() === filterRarity : true;
+                    const dateMatch = filterDate ? cosmetic.date.toLowerCase() === filterDate : true;
+                    const eventMatch = filterEvent ? cosmetic.event.toLowerCase() === filterEvent : true;
+
+                    return nameMatch && rarityMatch && dateMatch && eventMatch;
+                });
+                currentPage = 1;
+                displayCosmetics(currentFilteredCosmetics, currentPage);
+                generatePaginationButtons(currentFilteredCosmetics, currentPage);
+                updateResultsCount(currentFilteredCosmetics.length);
+            }
+
+            function generatePaginationButtons(cosmeticsList, currentPage) {
+                paginationContainer.innerHTML = '';
+                const totalPages = Math.ceil(cosmeticsList.length / cosmeticsPerPage);
+
+                if (totalPages <= 1) return;
+
+                const prevButton = document.createElement('button');
+                prevButton.className = 'pagination-button';
+                prevButton.textContent = 'Précédent';
+                prevButton.disabled = currentPage === 1;
+                prevButton.addEventListener('click', () => {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        displayCosmetics(cosmeticsList, currentPage);
+                        updatePaginationButtons(currentPage, totalPages);
+                    }
+                });
+                paginationContainer.appendChild(prevButton);
+
+                if (totalPages <= 7) {
+                    for (let i = 1; i <= totalPages; i++) {
+                        paginationContainer.appendChild(createPageButton(i, currentPage, cosmeticsList, totalPages));
+                    }
+                } else {
+                    paginationContainer.appendChild(createPageButton(1, currentPage, cosmeticsList, totalPages));
+
+                    if (currentPage > 3) {
+                        const dots = document.createElement('span');
+                        dots.textContent = '...';
+                        paginationContainer.appendChild(dots);
+                    }
+
+                    const startPage = Math.max(2, currentPage - paginationPageRange);
+                    const endPage = Math.min(totalPages - 1, currentPage + paginationPageRange);
+                    for (let i = startPage; i <= endPage; i++) {
+                        paginationContainer.appendChild(createPageButton(i, currentPage, cosmeticsList, totalPages));
+                    }
+
+                    if (currentPage < totalPages - 2) {
+                        const dots = document.createElement('span');
+                        dots.textContent = '...';
+                        paginationContainer.appendChild(dots);
+                    }
+
+                    paginationContainer.appendChild(createPageButton(totalPages, currentPage, cosmeticsList, totalPages));
+                }
+
+                const nextButton = document.createElement('button');
+                nextButton.className = 'pagination-button';
+                nextButton.textContent = 'Suivant';
+                nextButton.disabled = currentPage === totalPages;
+                nextButton.addEventListener('click', () => {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        displayCosmetics(cosmeticsList, currentPage);
+                        updatePaginationButtons(currentPage, totalPages);
+                    }
+                });
+                paginationContainer.appendChild(nextButton);
+            }
+
+            function createPageButton(pageNumber, currentPage, cosmeticsList, totalPages) {
+                const pageButton = document.createElement('button');
+                pageButton.className = 'pagination-button';
+                pageButton.textContent = pageNumber;
+                if (pageNumber === currentPage) {
+                    pageButton.classList.add('active');
+                }
+                pageButton.addEventListener('click', () => {
+                    currentPage = pageNumber;
+                    displayCosmetics(cosmeticsList, currentPage);
+                    updatePaginationButtons(currentPage, totalPages);
+                });
+                return pageButton;
+            }
+
+            function updatePaginationButtons(currentPage, totalPages) {
+                const buttons = paginationContainer.querySelectorAll('.pagination-button');
+                buttons.forEach(button => {
+                    if (button.textContent === 'Précédent') {
+                        button.disabled = currentPage === 1;
+                    } else if (button.textContent === 'Suivant') {
+                        button.disabled = currentPage === totalPages;
+                    } else {
+                        button.classList.remove('active');
+                        if (parseInt(button.textContent) === currentPage) {
+                            button.classList.add('active');
+                        }
+                    }
+                });
+            }
+
+            function updateResultsCount(count) {
+                resultsCountElement.textContent = `Cosmétiques affichés : ${count}`;
+            }
+
+            function resetFilters() {
+                searchNameInput.value = '';
+                filterRaritySelect.value = '';
+                filterDateSelect.value = '';
+                filterEventSelect.value = '';
+                filterCosmetics();
+            }
+
+
+            loadCosmetics();
+        });
+    </script>
+
+</body>
+</html>
